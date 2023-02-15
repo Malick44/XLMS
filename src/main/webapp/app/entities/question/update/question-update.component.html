@@ -1,0 +1,95 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-question-heading" data-cy="QuestionCreateUpdateHeading" jhiTranslate="opnlmsApp.question.home.createOrEditLabel">
+        Create or edit a Question
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.question.id" for="field_id">Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="id"
+            id="field_id"
+            data-cy="id"
+            formControlName="id"
+            [readonly]="editForm.get('id')!.value != null"
+          />
+          <div *ngIf="editForm.get('id')!.invalid && (editForm.get('id')!.dirty || editForm.get('id')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('id')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.question.sectionId" for="field_sectionId">Section Id</label>
+          <input type="text" class="form-control" name="sectionId" id="field_sectionId" data-cy="sectionId" formControlName="sectionId" />
+          <div *ngIf="editForm.get('sectionId')!.invalid && (editForm.get('sectionId')!.dirty || editForm.get('sectionId')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('sectionId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.question.courseId" for="field_courseId">Course Id</label>
+          <input type="text" class="form-control" name="courseId" id="field_courseId" data-cy="courseId" formControlName="courseId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.question.text" for="field_text">Text</label>
+          <input type="text" class="form-control" name="text" id="field_text" data-cy="text" formControlName="text" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.question.assignmentId" for="field_assignmentId">Assignment Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="assignmentId"
+            id="field_assignmentId"
+            data-cy="assignmentId"
+            formControlName="assignmentId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.question.assessmentId" for="field_assessmentId">Assessment Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="assessmentId"
+            id="field_assessmentId"
+            data-cy="assessmentId"
+            formControlName="assessmentId"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

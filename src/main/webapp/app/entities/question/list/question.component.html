@@ -1,0 +1,116 @@
+<div>
+  <h2 id="page-heading" data-cy="QuestionHeading">
+    <span jhiTranslate="opnlmsApp.question.home.title">Questions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="opnlmsApp.question.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-question"
+        [routerLink]="['/question/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="opnlmsApp.question.home.createLabel"> Create a new Question </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="questions?.length === 0">
+    <span jhiTranslate="opnlmsApp.question.home.notFound">No Questions found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="questions && questions.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.question.id">Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sectionId">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.question.sectionId">Section Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="courseId">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.question.courseId">Course Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="text">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.question.text">Text</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="assignmentId">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.question.assignmentId">Assignment Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="assessmentId">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.question.assessmentId">Assessment Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let question of questions; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/question', question.id, 'view']">{{ question.id }}</a>
+          </td>
+          <td>{{ question.sectionId }}</td>
+          <td>{{ question.courseId }}</td>
+          <td>{{ question.text }}</td>
+          <td>{{ question.assignmentId }}</td>
+          <td>{{ question.assessmentId }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/question', question.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/question', question.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(question)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

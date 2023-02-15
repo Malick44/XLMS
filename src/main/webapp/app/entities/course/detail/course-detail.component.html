@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="course">
+      <h2 data-cy="courseDetailsHeading"><span jhiTranslate="opnlmsApp.course.detail.title">Course</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="opnlmsApp.course.id">Id</span></dt>
+        <dd>
+          <span>{{ course.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.course.title">Title</span></dt>
+        <dd>
+          <span>{{ course.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.course.authorId">Author Id</span></dt>
+        <dd>
+          <span>{{ course.authorId }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.course.authorName">Author Name</span></dt>
+        <dd>
+          <span>{{ course.authorName }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.course.description">Description</span></dt>
+        <dd>
+          <span>{{ course.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.course.category">Category</span></dt>
+        <dd>
+          <span>{{ course.category }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.course.subCategory">Sub Category</span></dt>
+        <dd>
+          <span>{{ course.subCategory }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.course.level">Level</span></dt>
+        <dd>
+          <span>{{ course.level }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.course.language">Language</span></dt>
+        <dd>
+          <span>{{ course.language }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.course.duration">Duration</span></dt>
+        <dd>
+          <span>{{ course.duration }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.course.price">Price</span></dt>
+        <dd>
+          <span>{{ course.price }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.course.rating">Rating</span></dt>
+        <dd>
+          <span>{{ course.rating }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.course.ratingCount">Rating Count</span></dt>
+        <dd>
+          <span>{{ course.ratingCount }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.course.thumbnail">Thumbnail</span></dt>
+        <dd>
+          <span>{{ course.thumbnail }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.course.url">Url</span></dt>
+        <dd>
+          <span>{{ course.url }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/course', course.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

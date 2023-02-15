@@ -1,0 +1,113 @@
+<div>
+  <h2 id="page-heading" data-cy="OptionHeading">
+    <span jhiTranslate="opnlmsApp.option.home.title">Options</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="opnlmsApp.option.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-option"
+        [routerLink]="['/option/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="opnlmsApp.option.home.createLabel"> Create a new Option </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="options?.length === 0">
+    <span jhiTranslate="opnlmsApp.option.home.notFound">No Options found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="options && options.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.option.id">Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="text">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.option.text">Text</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="questionId">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.option.questionId">Question Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="correct">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.option.correct">Correct</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="assessmentId">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.option.assessmentId">Assessment Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="assignmentId">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.option.assignmentId">Assignment Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="isSelected">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.option.isSelected">Is Selected</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let option of options; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/option', option.id, 'view']">{{ option.id }}</a>
+          </td>
+          <td>{{ option.text }}</td>
+          <td>{{ option.questionId }}</td>
+          <td>{{ option.correct }}</td>
+          <td>{{ option.assessmentId }}</td>
+          <td>{{ option.assignmentId }}</td>
+          <td>{{ option.isSelected }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/option', option.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/option', option.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(option)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

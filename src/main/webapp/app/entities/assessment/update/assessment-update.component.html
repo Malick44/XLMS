@@ -1,0 +1,94 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-assessment-heading" data-cy="AssessmentCreateUpdateHeading" jhiTranslate="opnlmsApp.assessment.home.createOrEditLabel">
+        Create or edit a Assessment
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.assessment.id" for="field_id">Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="id"
+            id="field_id"
+            data-cy="id"
+            formControlName="id"
+            [readonly]="editForm.get('id')!.value != null"
+          />
+          <div *ngIf="editForm.get('id')!.invalid && (editForm.get('id')!.dirty || editForm.get('id')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('id')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.assessment.title" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.assessment.courseId" for="field_courseId">Course Id</label>
+          <input type="text" class="form-control" name="courseId" id="field_courseId" data-cy="courseId" formControlName="courseId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.assessment.sectionId" for="field_sectionId">Section Id</label>
+          <input type="text" class="form-control" name="sectionId" id="field_sectionId" data-cy="sectionId" formControlName="sectionId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.assessment.studentId" for="field_studentId">Student Id</label>
+          <input type="text" class="form-control" name="studentId" id="field_studentId" data-cy="studentId" formControlName="studentId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.assessment.examDate" for="field_examDate">Exam Date</label>
+          <div class="input-group">
+            <input
+              id="field_examDate"
+              data-cy="examDate"
+              type="text"
+              class="form-control"
+              name="examDate"
+              ngbDatepicker
+              #examDateDp="ngbDatepicker"
+              formControlName="examDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="examDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.assessment.timeLimit" for="field_timeLimit">Time Limit</label>
+          <input type="number" class="form-control" name="timeLimit" id="field_timeLimit" data-cy="timeLimit" formControlName="timeLimit" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.assessment.score" for="field_score">Score</label>
+          <input type="number" class="form-control" name="score" id="field_score" data-cy="score" formControlName="score" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

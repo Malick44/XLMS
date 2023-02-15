@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="instructor">
+      <h2 data-cy="instructorDetailsHeading"><span jhiTranslate="opnlmsApp.instructor.detail.title">Instructor</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="opnlmsApp.instructor.id">Id</span></dt>
+        <dd>
+          <span>{{ instructor.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.instructor.name">Name</span></dt>
+        <dd>
+          <span>{{ instructor.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.instructor.email">Email</span></dt>
+        <dd>
+          <span>{{ instructor.email }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/instructor', instructor.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

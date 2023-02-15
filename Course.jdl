@@ -1,0 +1,83 @@
+// Student entity
+entity Student {
+  id String required
+  name String required
+  email String required
+}
+// Instructor entity
+entity Instructor {
+  id String required
+  name String required
+  email String required
+}
+// Course entity with relationships
+entity Course {
+  id String required
+  title String required
+  authorId String required
+  authorName String
+  description String
+  category String
+  subCategory String
+  level String
+  language String
+  duration String
+  price String
+  rating String
+  ratingCount String
+  thumbnail String
+  url String
+}
+// Section entity
+entity Section {
+  id String required
+  title String
+  description String
+  courseId String
+  servicePath String
+}
+// Assignment entity with relationships
+entity Assignment {
+  id String required
+  title String
+  courseId String required
+  studentId String required
+  examDate LocalDate required
+  timeLimit Integer
+  score Integer
+}
+
+
+// Question entity with relationships
+entity Question {
+  id String required
+  sectionId String required
+  courseId String
+  text String
+  assignmentId String
+  assessmentId String
+}
+// Option entity with relationships
+entity Option {
+  id String required
+  text String required
+  questionId String required
+  correct Boolean required
+  assessmentId String
+  assignmentId String
+  isSelected Boolean
+}
+// Assessment entity with relationships
+entity Assessment {
+  id String required
+  title String
+  courseId String
+  sectionId String
+  studentId String
+  examDate LocalDate
+  timeLimit Integer
+  score Integer
+}
+// AssessmentQuestion entity with relationships
+
+

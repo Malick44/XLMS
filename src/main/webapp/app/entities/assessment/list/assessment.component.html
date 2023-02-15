@@ -1,0 +1,130 @@
+<div>
+  <h2 id="page-heading" data-cy="AssessmentHeading">
+    <span jhiTranslate="opnlmsApp.assessment.home.title">Assessments</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="opnlmsApp.assessment.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-assessment"
+        [routerLink]="['/assessment/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="opnlmsApp.assessment.home.createLabel"> Create a new Assessment </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="assessments?.length === 0">
+    <span jhiTranslate="opnlmsApp.assessment.home.notFound">No Assessments found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="assessments && assessments.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.assessment.id">Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="title">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.assessment.title">Title</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="courseId">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.assessment.courseId">Course Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sectionId">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.assessment.sectionId">Section Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="studentId">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.assessment.studentId">Student Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="examDate">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.assessment.examDate">Exam Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="timeLimit">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.assessment.timeLimit">Time Limit</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="score">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.assessment.score">Score</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let assessment of assessments; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/assessment', assessment.id, 'view']">{{ assessment.id }}</a>
+          </td>
+          <td>{{ assessment.title }}</td>
+          <td>{{ assessment.courseId }}</td>
+          <td>{{ assessment.sectionId }}</td>
+          <td>{{ assessment.studentId }}</td>
+          <td>{{ assessment.examDate | formatMediumDate }}</td>
+          <td>{{ assessment.timeLimit }}</td>
+          <td>{{ assessment.score }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/assessment', assessment.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/assessment', assessment.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(assessment)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

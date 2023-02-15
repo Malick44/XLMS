@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="assignment">
+      <h2 data-cy="assignmentDetailsHeading"><span jhiTranslate="opnlmsApp.assignment.detail.title">Assignment</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="opnlmsApp.assignment.id">Id</span></dt>
+        <dd>
+          <span>{{ assignment.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.assignment.title">Title</span></dt>
+        <dd>
+          <span>{{ assignment.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.assignment.courseId">Course Id</span></dt>
+        <dd>
+          <span>{{ assignment.courseId }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.assignment.studentId">Student Id</span></dt>
+        <dd>
+          <span>{{ assignment.studentId }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.assignment.examDate">Exam Date</span></dt>
+        <dd>
+          <span>{{ assignment.examDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.assignment.timeLimit">Time Limit</span></dt>
+        <dd>
+          <span>{{ assignment.timeLimit }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.assignment.score">Score</span></dt>
+        <dd>
+          <span>{{ assignment.score }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/assignment', assignment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="question">
+      <h2 data-cy="questionDetailsHeading"><span jhiTranslate="opnlmsApp.question.detail.title">Question</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="opnlmsApp.question.id">Id</span></dt>
+        <dd>
+          <span>{{ question.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.question.sectionId">Section Id</span></dt>
+        <dd>
+          <span>{{ question.sectionId }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.question.courseId">Course Id</span></dt>
+        <dd>
+          <span>{{ question.courseId }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.question.text">Text</span></dt>
+        <dd>
+          <span>{{ question.text }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.question.assignmentId">Assignment Id</span></dt>
+        <dd>
+          <span>{{ question.assignmentId }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.question.assessmentId">Assessment Id</span></dt>
+        <dd>
+          <span>{{ question.assessmentId }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/question', question.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

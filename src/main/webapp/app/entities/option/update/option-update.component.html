@@ -1,0 +1,128 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-option-heading" data-cy="OptionCreateUpdateHeading" jhiTranslate="opnlmsApp.option.home.createOrEditLabel">
+        Create or edit a Option
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.option.id" for="field_id">Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="id"
+            id="field_id"
+            data-cy="id"
+            formControlName="id"
+            [readonly]="editForm.get('id')!.value != null"
+          />
+          <div *ngIf="editForm.get('id')!.invalid && (editForm.get('id')!.dirty || editForm.get('id')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('id')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.option.text" for="field_text">Text</label>
+          <input type="text" class="form-control" name="text" id="field_text" data-cy="text" formControlName="text" />
+          <div *ngIf="editForm.get('text')!.invalid && (editForm.get('text')!.dirty || editForm.get('text')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('text')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.option.questionId" for="field_questionId">Question Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="questionId"
+            id="field_questionId"
+            data-cy="questionId"
+            formControlName="questionId"
+          />
+          <div *ngIf="editForm.get('questionId')!.invalid && (editForm.get('questionId')!.dirty || editForm.get('questionId')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('questionId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.option.correct" for="field_correct">Correct</label>
+          <input type="checkbox" class="form-check" name="correct" id="field_correct" data-cy="correct" formControlName="correct" />
+          <div *ngIf="editForm.get('correct')!.invalid && (editForm.get('correct')!.dirty || editForm.get('correct')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('correct')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.option.assessmentId" for="field_assessmentId">Assessment Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="assessmentId"
+            id="field_assessmentId"
+            data-cy="assessmentId"
+            formControlName="assessmentId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.option.assignmentId" for="field_assignmentId">Assignment Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="assignmentId"
+            id="field_assignmentId"
+            data-cy="assignmentId"
+            formControlName="assignmentId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="opnlmsApp.option.isSelected" for="field_isSelected">Is Selected</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isSelected"
+            id="field_isSelected"
+            data-cy="isSelected"
+            formControlName="isSelected"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

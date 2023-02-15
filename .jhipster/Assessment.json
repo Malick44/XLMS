@@ -1,0 +1,50 @@
+{
+  "applications": "*",
+  "changelogDate": "20230215043848",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "assessment",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "courseId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sectionId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "studentId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "examDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "timeLimit",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "score",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Assessment",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

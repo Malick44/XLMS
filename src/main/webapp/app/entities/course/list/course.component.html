@@ -1,0 +1,169 @@
+<div>
+  <h2 id="page-heading" data-cy="CourseHeading">
+    <span jhiTranslate="opnlmsApp.course.home.title">Courses</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="opnlmsApp.course.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-course"
+        [routerLink]="['/course/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="opnlmsApp.course.home.createLabel"> Create a new Course </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="courses?.length === 0">
+    <span jhiTranslate="opnlmsApp.course.home.notFound">No Courses found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="courses && courses.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.course.id">Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="title">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.course.title">Title</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="authorId">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.course.authorId">Author Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="authorName">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.course.authorName">Author Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.course.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="category">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.course.category">Category</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="subCategory">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.course.subCategory">Sub Category</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="level">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.course.level">Level</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="language">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.course.language">Language</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="duration">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.course.duration">Duration</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="price">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.course.price">Price</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="rating">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.course.rating">Rating</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ratingCount">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.course.ratingCount">Rating Count</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="thumbnail">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.course.thumbnail">Thumbnail</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="url">
+            <div class="d-flex">
+              <span jhiTranslate="opnlmsApp.course.url">Url</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of courses; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/course', course.id, 'view']">{{ course.id }}</a>
+          </td>
+          <td>{{ course.title }}</td>
+          <td>{{ course.authorId }}</td>
+          <td>{{ course.authorName }}</td>
+          <td>{{ course.description }}</td>
+          <td>{{ course.category }}</td>
+          <td>{{ course.subCategory }}</td>
+          <td>{{ course.level }}</td>
+          <td>{{ course.language }}</td>
+          <td>{{ course.duration }}</td>
+          <td>{{ course.price }}</td>
+          <td>{{ course.rating }}</td>
+          <td>{{ course.ratingCount }}</td>
+          <td>{{ course.thumbnail }}</td>
+          <td>{{ course.url }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/course', course.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/course', course.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(course)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

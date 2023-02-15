@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="option">
+      <h2 data-cy="optionDetailsHeading"><span jhiTranslate="opnlmsApp.option.detail.title">Option</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="opnlmsApp.option.id">Id</span></dt>
+        <dd>
+          <span>{{ option.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.option.text">Text</span></dt>
+        <dd>
+          <span>{{ option.text }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.option.questionId">Question Id</span></dt>
+        <dd>
+          <span>{{ option.questionId }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.option.correct">Correct</span></dt>
+        <dd>
+          <span>{{ option.correct }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.option.assessmentId">Assessment Id</span></dt>
+        <dd>
+          <span>{{ option.assessmentId }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.option.assignmentId">Assignment Id</span></dt>
+        <dd>
+          <span>{{ option.assignmentId }}</span>
+        </dd>
+        <dt><span jhiTranslate="opnlmsApp.option.isSelected">Is Selected</span></dt>
+        <dd>
+          <span>{{ option.isSelected }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/option', option.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

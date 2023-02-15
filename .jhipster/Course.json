@@ -1,0 +1,80 @@
+{
+  "applications": "*",
+  "changelogDate": "20230215043843",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "course",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "authorId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "authorName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "category",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "subCategory",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "level",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "language",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "duration",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "rating",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ratingCount",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "thumbnail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Course",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}
